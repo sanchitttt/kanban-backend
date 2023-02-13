@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const { TOKEN_SECRET } = require('../config/config');
 const User = require('../models/user.modal');
 const ApiError = require('../utils/ApiError');
+const catchAsync = require('../utils/catchAsync');
 
 const verifyAuth = (req, res, next) => {
     try {
@@ -13,8 +14,7 @@ const verifyAuth = (req, res, next) => {
             const fetchUser = (id) => {
                 return User.findOne({ _id: id });
             }
-
-           catchAsync(fetchUser(jwtPayload.userId).then((result) => {
+            fetchUser(jwtPayload.userId).then((result) => {
                 if (!result) {
                     throw new ApiError(httpStatus.NOT_FOUND);
                 }
@@ -24,15 +24,14 @@ const verifyAuth = (req, res, next) => {
                     next();
                 }
             }).catch((err) => {
-                if (err.statusCode === 404) throw new ApiError(httpStatus.NOT_FOUND)
-                else throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR);
-            }))
+                if (err.statusCode === 404) res.status(401, "Please login first!").end()
+                else res.status(401, "Please login first!").end()
+            })
         }
 
 
-
-
     } catch (error) {
+        console.log('error is ', error);
         throw new ApiError(httpStatus.UNAUTHORIZED, "Please login first");
     }
 
