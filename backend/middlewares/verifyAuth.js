@@ -14,13 +14,19 @@ const verifyAuth = (req, res, next) => {
                 return User.findOne({ _id: id });
             }
 
-            fetchUser(jwtPayload.userId).then((result) => {
-                result.password = null;
-                req.user = result;
-                next();
-            }).catch(() => {
-                throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR);
-            })
+           catchAsync(fetchUser(jwtPayload.userId).then((result) => {
+                if (!result) {
+                    throw new ApiError(httpStatus.NOT_FOUND);
+                }
+                else {
+                    result.password = null;
+                    req.user = result;
+                    next();
+                }
+            }).catch((err) => {
+                if (err.statusCode === 404) throw new ApiError(httpStatus.NOT_FOUND)
+                else throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR);
+            }))
         }
 
 
