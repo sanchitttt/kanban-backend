@@ -18,7 +18,7 @@ app.use(cookieParser());
 //allow requests from anywhere
 app.use(
     cors({
-        origin: `https://kanban-frontendmentor-5wyr.vercel.app/`,
+        origin: `http://localhost:3000`,
         allowedHeaders: "Set-Cookie,Origin, X-Requested-With, Content-Type, Accept,'Authorization', 'x-csrf-token'",
         credentials: true,
     })
