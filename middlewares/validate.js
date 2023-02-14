@@ -13,7 +13,8 @@ const validate = (schema, obj) => (req, res, next) => {
             const { error } = compiledSchema.validate(req.body);
             console.log(error);
             if (error) {
-                res.status(httpStatus.BAD_REQUEST).json(error)
+                console.log('called')
+                throw new ApiError(httpStatus.BAD_REQUEST,error.message);
             }
             else{
                 next();

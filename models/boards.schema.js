@@ -2,37 +2,37 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 
 
-const TasksSchema = new mongoose.Schema({
-    title: {
-        type: String, trim: true, required: true
+const TasksSchema = new mongoose.Schema ({
+    title : {
+        type:String,trim:true,required:true
     },
-    description: {
-        type: String, trim: true, required: true
+    description : {
+        type:String,trim:true,required:true
     },
     status: {
-        type: String, trim: true, required: true
+        type:String,trim:true,required:true
     },
     subtasks: [
         {
-            title: { type: String, trim: true, required: true },
-            isComplete: { type: Boolean, required: true }
+            title: {type:String,trim:true,required:true},
+            isComplete : {type:Boolean,required:true}
         }
     ]
 })
 
 const ColumnSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        trim: true
+    name : {
+        type:String,
+        trim:true
     },
-    tasks: [TasksSchema]
+    tasks : [TasksSchema]
 });
 
 const BoardSchema = new mongoose.Schema({
     name: {
         type: String,
         trim: true,
-        // unique:true
+        unique:true
     },
     columns: [ColumnSchema]
 })
@@ -47,9 +47,9 @@ const BoardsSchema = new mongoose.Schema({
             return validator.isEmail(value)
         }
     },
-    boards: {type:[BoardSchema],default:[]}
+    boards: [BoardSchema]
 })
 
-const Board = mongoose.model('boards', BoardsSchema);
+const Board = mongoose.model('boards',BoardsSchema);
 
 module.exports = Board;

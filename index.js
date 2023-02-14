@@ -18,12 +18,11 @@ app.use(cookieParser());
 //allow requests from anywhere
 app.use(
     cors({
-        origin: "*",
+        origin: `http://localhost:3000`,
         allowedHeaders: "Set-Cookie,Origin, X-Requested-With, Content-Type, Accept,'Authorization', 'x-csrf-token'",
         credentials: true,
     })
 );
-
 
 app.options("*", cors());
 
@@ -32,7 +31,6 @@ app.use((req,res,next) => {
     console.log(req.url,req.body);
     next();
 })
-
 app.use("/v1", routes);
 
 mongoose.connect(MONGODB_URI)

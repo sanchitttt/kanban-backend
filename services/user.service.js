@@ -3,11 +3,7 @@ const bcrypt = require('bcrypt');
 const User = require("../models/user.modal");
 const ApiError = require("../utils/ApiError");
 const Board = require("../models/boards.schema");
-const data = require('../data/data.json');
-const BoardService = require("./boards.service");
 
-
-const BoardServiceInstance = new BoardService();
 
 class UserService {
     async hashPassword(password) {
@@ -23,18 +19,15 @@ class UserService {
             }
             else {
                 const hashedPassword = await this.hashPassword(userBody.password);
-                const newUser = await User.create({ ...userBody, password: hashedPassword })
-                const obj = {
+                const newUser = await User.create({ ...userBody, password: hashedPassword });
+                await Board.create({
                     email: userBody.email,
-                    name: userBody.name,
-                    boards: data.boards
-                }
-                await Board.create({name:userBody.email,email:userBody.email});
-                await BoardServiceInstance.addBoard(userBody.email,data.boards);
+                    boards: []
+                })
                 return newUser;
             }
         } catch (error) {
-            console.log('error = ', error);
+            console.log('error = ',error);
             throw error;
         }
     }
