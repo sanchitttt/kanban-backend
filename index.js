@@ -19,7 +19,7 @@ app.use(cookieParser());
 app.use(
     cors({
         origin: "https://kanban-sanchit.vercel.app",
-        allowedHeaders: "Set-Cookie,Origin, X-Requested-With, Content-Type, Accept,'Authorization', 'x-csrf-token'",
+        allowedHeaders: "Set-Cookie,Origin, X-Requested-With, Content-Type, Accept,Authorization, x-csrf-token",
         credentials: true,
     })
 );
