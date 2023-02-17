@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 const User = require("../models/user.modal");
 const ApiError = require("../utils/ApiError");
 const Board = require("../models/boards.schema");
-const data = require('../data/data.json');
 
 class UserService {
     async hashPassword(password) {
