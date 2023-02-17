@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const User = require("../models/user.modal");
 const ApiError = require("../utils/ApiError");
 const Board = require("../models/boards.schema");
-
+const data = require('../data/data.json');
 
 class UserService {
     async hashPassword(password) {
@@ -22,7 +22,7 @@ class UserService {
                 const newUser = await User.create({ ...userBody, password: hashedPassword });
                 await Board.create({
                     email: userBody.email,
-                    boards: []
+                    ...data
                 })
                 return newUser;
             }
