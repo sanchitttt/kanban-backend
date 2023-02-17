@@ -22,7 +22,7 @@ class UserService {
                 const newUser = await User.create({ ...userBody, password: hashedPassword });
                 await Board.create({
                     email: userBody.email,
-                    ...data
+                    boards : []
                 })
                 return newUser;
             }
