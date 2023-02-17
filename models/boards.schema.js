@@ -4,18 +4,18 @@ const validator = require('validator');
 
 const TasksSchema = new mongoose.Schema ({
     title : {
-        type:String,trim:true,required:true
+        type:String,trim:true
     },
     description : {
-        type:String,trim:true,required:true
+        type:String,trim:true
     },
     status: {
-        type:String,trim:true,required:true
+        type:String,trim:true
     },
     subtasks: [
         {
-            title: {type:String,trim:true,required:true},
-            isComplete : {type:Boolean,required:true}
+            title: {type:String,trim:true},
+            isComplete : {type:Boolean}
         }
     ]
 })
@@ -40,7 +40,6 @@ const BoardSchema = new mongoose.Schema({
 const BoardsSchema = new mongoose.Schema({
     email: {
         type: String,
-        required: true,
         trim: true,
         unique: true,
         validate(value) {
