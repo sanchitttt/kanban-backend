@@ -19,7 +19,7 @@ const verifyAuth = (req, res, next) => {
                 req.user = result;
                 next();
             }).catch(() => {
-                throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR);
+                res.status(500).end();
             })
         }
 
@@ -27,7 +27,7 @@ const verifyAuth = (req, res, next) => {
 
 
     } catch (error) {
-        throw new ApiError(httpStatus.UNAUTHORIZED, "Please login first");
+        res.status(401).json({"message":"Please login first"})
     }
 
 }
