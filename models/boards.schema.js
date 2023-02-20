@@ -32,7 +32,6 @@ const BoardSchema = new mongoose.Schema({
     name: {
         type: String,
         trim: true,
-        unique:true
     },
     columns: [ColumnSchema]
 })
