@@ -11,7 +11,6 @@ const validate = (schema, obj) => (req, res, next) => {
         const compiledSchema = Joi.compile(schema);
         if(obj === 'body'){
             const { error } = compiledSchema.validate(req.body);
-            console.log(error);
             if (error) {
                 res.status(httpStatus.BAD_REQUEST).json(error.message);
             }
