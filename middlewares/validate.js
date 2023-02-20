@@ -6,7 +6,7 @@ const Joi = require('joi');
 const validate = (schema, obj) => (req, res, next) => {
     try {
         if( !req.is('application/json')){
-            res.status(httpStatus.UNSUPPORTED_MEDIA_TYPE).json({"message":"Give a valid JSON body});
+            res.status(httpStatus.UNSUPPORTED_MEDIA_TYPE).json({"message":"Give a valid JSON body"});
         }
         const compiledSchema = Joi.compile(schema);
         if(obj === 'body'){
