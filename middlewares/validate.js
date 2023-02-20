@@ -6,15 +6,14 @@ const Joi = require('joi');
 const validate = (schema, obj) => (req, res, next) => {
     try {
         if( !req.is('application/json')){
-            throw new ApiError(httpStatus.UNSUPPORTED_MEDIA_TYPE, "Give a valid JSON body");
+            res.status(httpStatus.UNSUPPORTED_MEDIA_TYPE).json({"message":"Give a valid JSON body});
         }
         const compiledSchema = Joi.compile(schema);
         if(obj === 'body'){
             const { error } = compiledSchema.validate(req.body);
             console.log(error);
             if (error) {
-                console.log('called')
-                throw new ApiError(httpStatus.BAD_REQUEST,error.message);
+                res.status(httpStatus.BAD_REQUEST).json(error.message);
             }
             else{
                 next();
