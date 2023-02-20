@@ -41,7 +41,6 @@ const BoardsSchema = new mongoose.Schema({
     email: {
         type: String,
         trim: true,
-        unique: true,
         validate(value) {
             return validator.isEmail(value)
         }
