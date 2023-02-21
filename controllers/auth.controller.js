@@ -35,7 +35,7 @@ const login = catchAsync(async (req, res) => {
             maxAge : expiration,
             httpOnly: true,
             secure:true,
-            sameSite:'none'
+            sameSite:'None'
         })
         user.password = null;
         req.user = user;
