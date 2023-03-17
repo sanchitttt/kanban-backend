@@ -6,7 +6,8 @@ const dashboardRoutes = require('./dashboard.routes');
 
 router.use("/auth", authRoutes);
 router.use("/dashboard", verifyAuth, dashboardRoutes);
-router.use('/openai', verifyAuth, openAiRoutes);
+//router.use('/openai', verifyAuth, openAiRoutes);
+router.use('/openai', openAiRoutes);
 router.get("/test", (req, res) => {
     res.end('Testing route works!');
 })
