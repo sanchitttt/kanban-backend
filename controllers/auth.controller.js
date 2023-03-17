@@ -42,7 +42,8 @@ const login = catchAsync(async (req, res) => {
             res.cookie("token", token, {
                 maxAge: expiration,
                 httpOnly: true,
-                secure: true
+                secure: true,
+                sameSite:'None'
             })
             user.password = null;
             req.user = user;
