@@ -12,6 +12,7 @@ const getPrompt = catchAsync(async (req, res) => {
         await BoardServiceInstance.addBoard(email, JSON.parse(chatGPTGeneratedReponse));
         res.status(200).json(JSON.parse(chatGPTGeneratedReponse));
     } catch (error) {
+        console.log('some error');
         console.log(error);
         res.status(400).json(error);
     }
