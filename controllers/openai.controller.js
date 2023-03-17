@@ -6,8 +6,7 @@ const BoardServiceInstance = new BoardService();
 
 const getPrompt = catchAsync(async (req, res) => {
     try {
-        const { prompt } = req.body;
-        const { email } = req.user;
+        const { prompt, email } = req.body;
         const chatGPTGeneratedReponse = await getChatGptResponse(prompt)
         await BoardServiceInstance.addBoard(email, JSON.parse(chatGPTGeneratedReponse));
         res.status(200).json(JSON.parse(chatGPTGeneratedReponse));
