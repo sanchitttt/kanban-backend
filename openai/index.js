@@ -47,6 +47,7 @@ Okay so the prompt is "${prompt}"
 (I also need you to generate columns like doing and done with no tasks next time if I give you a prompt. NOTE that the column names can differ on the basis of the prompt)
 
 Try to keep titles concise and short. In board names mentioning 'Board' is redundant.
+(NOTE : If there are no subtasks then instead of null an empty array should be the value of the field subtasks in Task interface)
 (NOTE : The status name can be one of the either column names and nothing else)
 (NOTE : Only return stringified JSON. Do not return any other text)
 
